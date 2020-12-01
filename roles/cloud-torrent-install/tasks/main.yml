@@ -1,0 +1,5 @@
+---
+- include: openssl.yml tags=cloud-torrent,openssl
+- include: plex.yml tags=cloud-torrent,plex 
+- include: tautulli.yml tags=cloud-torrent,tautulli
+- include: cloud-torrent.yml tags=cloud-torrent,cloud-torrent-install

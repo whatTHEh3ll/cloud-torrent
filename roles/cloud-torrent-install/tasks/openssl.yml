@@ -1,0 +1,31 @@
+---
+- block:
+
+  - name: Install openssl package
+    apt: name=openssl state=latest
+
+  - name: Create ssl directory
+    file: path=/etc/ssl/{{ ansible_ssh_host  }} state=directory mode=0775
+
+  - name: Generate Private key
+    openssl_privatekey: path=/etc/ssl/{{ ansible_ssh_host  }}/server-master.key
+
+  - name: Generate CSR
+    openssl_csr: 
+      path: /etc/ssl/{{ ansible_ssh_host  }}/{{ ansible_ssh_host  }}-client.csr
+      privatekey_path: /etc/ssl/{{ ansible_ssh_host  }}/server-master.key 
+      common_name: '{{ ansible_hostname }}'
+      country_name: US 
+      email_address: yeah@tutanota.de
+      organization_name: '{{ ansible_ssh_host  }}'
+
+  - name: Generate a self signed certificate
+    openssl_certificate:
+      csr_path: /etc/ssl/{{ ansible_ssh_host  }}/{{ ansible_ssh_host  }}-client.csr
+      path: /etc/ssl/{{ ansible_ssh_host  }}/{{ ansible_ssh_host  }}-self-signed.crt
+      privatekey_path: /etc/ssl/{{ ansible_ssh_host  }}/server-master.key
+      provider: selfsigned
+
+  tags:
+    - cloud-torrent
+    - openssl 

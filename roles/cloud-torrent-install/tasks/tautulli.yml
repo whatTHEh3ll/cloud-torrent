@@ -1,0 +1,58 @@
+---
+- block:
+
+  - name: 'tautulli : install prerequisites'
+    become: true
+    apt:
+      name:
+        - git-core
+        - python3.7
+
+  - name: 'Tautulli : clone Tautulli repo'
+    become: yes 
+    git:
+      repo: https://github.com/Tautulli/Tautulli
+      dest: /opt/Tautulli
+
+  - name: 'Tautulli : add user and groups'
+    become: yes 
+    shell:  addgroup tautulli && sudo adduser --system --no-create-home tautulli --ingroup tautulli
+    register: users
+
+  - debug:
+      var: users.stdout
+
+  - name: 'Tautulli : change ownership /opt/Tautulli'
+    become: yes 
+    shell: chown -R tautulli:tautulli /opt/Tautulli
+    args:
+        warn: no
+
+  - name: 'Tautulli : copy /opt/Tautulli/init-scripts/init.systemd to /lib/systemd/system/tautulli.service'
+    become: yes
+    copy:
+      src: /opt/Tautulli/init-scripts/init.systemd
+      dest: /lib/systemd/system/tautulli.service
+      remote_src: yes
+
+  - name: 'Tuatulli : enable Tuatulli service'
+    become: yes 
+    systemd:
+      name: tautulli.service
+      enabled: yes 
+
+  - name: 'Tuatulli : start Tautulli service'
+    become: yes
+    systemd:
+      name: tautulli.service
+      state: started
+
+  tags:
+    - cloud-torrent
+    - tautulli
+     
+      
+      
+      
+    
+

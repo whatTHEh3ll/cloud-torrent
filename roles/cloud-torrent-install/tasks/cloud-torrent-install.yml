@@ -1,0 +1,37 @@
+---
+- block:
+
+  - name: download and install cloud-torrent
+    become: yes 
+    shell: curl https://i.jpillora.com/cloud-torrent! | bash
+    args:
+      warn: no
+   
+  - name: copy cloud-torrent.service to /etc/systemd/system/cloud-torrent.service
+    template:
+      src: cloud-torrent.service.j2
+      dest: /etc/systemd/system/cloud-torrent.service
+      owner: root
+      group: root
+      decrypt: yes
+  
+  - name: 'enable cloud-torrent as a service'
+    become: yes 
+    systemd:
+      name: cloud-torrent
+      enabled: yes 
+   
+  - name: 'start cloud-torrent as a service'
+    become: yes 
+    systemd:
+      state: started
+      name: cloud-torrent 
+
+  tags:
+    - cloud-torrent
+    - cloud-torrent-install
+         
+  
+      
+  
+    
