@@ -17,7 +17,7 @@ DIY cloud torrent
 ### Things to do
 
 - [ ] write task role installs deluge seedbox
-- [ ] install plex drive - [https://github.com/plexdrive/plexdrive] (https://github.com/plexdrive/plexdrive)
+- [ ] install plex drive - [https://github.com/plexdrive/plexdrive](https://github.com/plexdrive/plexdrive)
 - [ ] create nginx reverse proxy
 - [ ] create Ansible task to issue Letsecrypt cert as well as revoke the cert if possible
 - [ ] use Ansible to automate Cloudflare and point domain to server
