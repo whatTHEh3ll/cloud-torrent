@@ -5,14 +5,18 @@ An Ansible playbook to install a media centerin the cloud
 Playbook includes the following
 
 [https://plex.tv](https://plex.tv)
-[https://github.com/Tautulli/Tautulli](https://github.com/Tautulli/Tautulli) - A web interface for Plex providing additional info like stats
-[https://github.com/jpillora/cloud-torrent](https://github.com/jpillora/cloud-torrent) - DIY cloud torrent
+
+[https://github.com/Tautulli/Tautulli](https://github.com/Tautulli/Tautulli) 
+A web interface for Plex providing additional info like stats
+
+[https://github.com/jpillora/cloud-torrent](https://github.com/jpillora/cloud-torrent) 
+DIY cloud torrent
 
 ## runs on ubuntu 18
 
 ### Things to do
 
-- [ ] write task that installs deluge seedbox
+- [ ] write task role installs deluge seedbox
 - [ ] install plex drive - [https://github.com/plexdrive/plexdrive] (https://github.com/plexdrive/plexdrive)
 - [ ] create nginx reverse proxy
 - [ ] create Ansible task to issue Letsecrypt cert as well as revoke the cert if possible
